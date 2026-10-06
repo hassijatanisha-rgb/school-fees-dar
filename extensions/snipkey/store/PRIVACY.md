@@ -30,4 +30,4 @@ Uninstalling Snipkey deletes the data it stored in your browser. Data you chose 
 
 ## Contact
 
-Questions about this policy: [OWNER: add a support email address here].
+Questions about this policy: open an issue at https://github.com/hassijatanisha-rgb/school-fees-dar/issues or use the Support tab on the Chrome Web Store listing.
