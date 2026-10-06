@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="sw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Risiti Rahisi – Tengeneza risiti bure</title>
+<meta name="description" content="Tengeneza risiti au ankara kwa sekunde, bure. Tuma kwa mteja kwenye WhatsApp. Free receipt and invoice maker for Tanzania.">
+<meta name="theme-color" content="#0f766e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230f766e%27/%3E%3Ctext x=%2716%27 y=%2723%27 font-size=%2720%27 text-anchor=%27middle%27 fill=%27white%27 font-family=%27sans-serif%27 font-weight=%27700%27%3ER%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1>Risiti Rahisi</h1>
+  <button id="lang" class="ghost" type="button">English</button>
+</header>
+
+<main>
+  <section class="card">
+    <h2 data-t="business">Biashara yako</h2>
+    <label><span data-t="bizName">Jina la biashara</span><input id="bizName" autocomplete="organization"></label>
+    <div class="row">
+      <label><span data-t="phone">Simu</span><input id="bizPhone" inputmode="tel"></label>
+      <label><span data-t="tin">TIN (si lazima)</span><input id="bizTin" inputmode="numeric"></label>
+    </div>
+    <label><span data-t="address">Mahali (si lazima)</span><input id="bizAddress"></label>
+  </section>
+
+  <section class="card">
+    <div class="seg" role="radiogroup">
+      <label><input type="radio" name="type" value="receipt" checked><span data-t="receipt">Risiti</span></label>
+      <label><input type="radio" name="type" value="invoice"><span data-t="invoice">Ankara</span></label>
+    </div>
+    <div class="row">
+      <label><span data-t="customer">Mteja</span><input id="customer"></label>
+      <label><span data-t="custPhone">Simu ya mteja</span><input id="custPhone" inputmode="tel" placeholder="07XX XXX XXX"></label>
+    </div>
+
+    <div id="items"></div>
+    <button id="addItem" class="ghost wide" type="button" data-t="addItem">+ Ongeza bidhaa</button>
+
+    <p class="total"><span data-t="total">Jumla</span> <strong id="total">TSh 0</strong></p>
+
+    <div class="row" id="payRow">
+      <label><span data-t="method">Imelipwa kwa</span>
+        <select id="method">
+          <option value="cash" data-t="cash">Taslimu</option>
+          <option value="mpesa">M-Pesa</option>
+          <option value="mixx">Mixx by Yas</option>
+          <option value="airtel">Airtel Money</option>
+          <option value="halo">HaloPesa</option>
+          <option value="bank" data-t="bank">Benki</option>
+        </select>
+      </label>
+      <label><span data-t="ref">Namba ya muamala</span><input id="ref"></label>
+    </div>
+    <label><span data-t="notes">Maelezo (si lazima)</span><input id="notes"></label>
+  </section>
+
+  <section class="card">
+    <canvas id="preview" aria-label="Receipt preview"></canvas>
+    <div class="actions">
+      <button id="share" type="button" data-t="share">Tuma kwa WhatsApp</button>
+      <button id="download" class="ghost" type="button" data-t="download">Pakua picha</button>
+      <button id="newDoc" class="ghost" type="button" data-t="new">Mpya</button>
+    </div>
+    <p class="hint" data-t="privacy">Taarifa zako zinabaki kwenye simu yako tu.</p>
+  </section>
+
+  <section class="card">
+    <h2 data-t="history">Historia</h2>
+    <ul id="history"></ul>
+  </section>
+</main>
+
+<template id="itemTpl">
+  <div class="item">
+    <input class="name" data-ph="itemName" placeholder="Bidhaa / huduma">
+    <input class="qty" inputmode="decimal" value="1" aria-label="qty">
+    <input class="price" inputmode="numeric" data-ph="price" placeholder="Bei">
+    <button class="del ghost" type="button" aria-label="remove">×</button>
+  </div>
+</template>
+
+<script src="app.js"></script>
+</body>
+</html>

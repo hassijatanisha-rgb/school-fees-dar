@@ -1,44 +1,30 @@
-# School fees (Dar es Salaam): side project
+# Risiti Rahisi
 
-A simple school-fee app for private schools in Dar: bursars see who has paid, parents get receipts and reminders automatically.
+A free receipt and invoice maker for small businesses in Tanzania, in Swahili and English. Fill in the items, tap **Tuma kwa WhatsApp**, and the customer gets a clean receipt image. Every receipt carries a small "Imetengenezwa bure na Risiti Rahisi · <your site>" line, so each receipt sent advertises the app.
 
-Goal: **US$200–300 a week (~US$11–13k a year) for ~1 hour a week** once running.
+- No signup, no server, no running cost: three static files in `app/`.
+- Data stays on the user's phone (localStorage).
+- Works on any phone browser; on Android it shares the image straight into WhatsApp.
 
-## The money math
+## Go live (one time, ~10 minutes, free)
 
-Price per student per term, paid by the school (parents pay nothing extra):
+1. Sign up at https://pages.cloudflare.com (or Netlify) with GitHub.
+2. Create a project from this repo. Build command: none. Output directory: `app`.
+3. Optional (~US$10/yr): buy a short domain and attach it. The footer on every receipt shows whatever address the site runs on.
 
-| price per student per term | per student per year (3 terms) | students needed for ~US$12k/yr | ≈ schools of 300 students |
-| --- | --- | --- | --- |
-| TZS 3,000 | TZS 9,000 | ~3,500 | ~12 |
-| TZS 5,000 | TZS 15,000 | ~2,100 | ~7 |
+## Getting users without selling
 
-(Assumes roughly TZS 2,600 per US$. Check the current rate.) Mobile-money and SMS costs are passed through or capped.
+See `GROWTH.md`. Posting a status is the only thing you do.
 
-## The honest risk
+## Making money (later, only once people use it)
 
-Airtel Money's School Pay gives schools a fees module **free** (source: replica/recon.md #4), and banks offer free fee collection too. So we must win on what the free options don't do:
+Free stays free. Paid "Pro", roughly TZS 5,000/month, would add: own logo, no footer, customer list, backup of history. Don't build it until a few hundred businesses use the free version. Before charging, you'll need a way to take mobile-money payments, which usually means a registered business.
 
-- works with **every** network and bank, not one telco
-- **automatic receipts and reminders in Swahili** so the bursar stops chasing
-- **matching payments to students** without the WhatsApp-screenshot mess
-- set up in an afternoon from the school's existing Excel sheet
+## Before launch
 
-If 5 bursars won't say "yes, I'd pay TZS X for that", we stop or switch (backup: `replica/alternatives/field-service/`).
+- Have a native speaker check the Swahili wording.
+- Check that the name "Risiti Rahisi" isn't already taken in Tanzania (BRELA search) and that a domain is free.
 
-## Plan
+## Other ideas explored
 
-1. **Validate (before building much, ~2–3 hrs total).** Through your and your mum's connections, ask 5 bursars or owners:
-   - How do you track who has paid today?
-   - What wastes the most time at the start of term?
-   - Do you use Airtel School Pay or a bank system? What's annoying about it?
-   - Would you pay TZS 3,000–5,000 per student per term for this? Would you try it free for one term?
-2. **MVP (built by Claude, ~a few weeks).** Excel import, fee structure, term invoices, record payments + receipts, balances, defaulters, SMS reminders. Manual payments only.
-3. **Pilot with 1–2 schools free for one term.** Fix what hurts.
-4. **Phase 2.** Mobile-money collection via an aggregator and auto-matching.
-5. **Sell.** Warm intros first; then a commission-only agent (20–30% of year one) so your time stays ~1 hr/week.
-
-## Replica steps
-
-`recon` ✅ → architect → design → build → backend → test → diff → entrepreneur → brand → launch → deploy
-(skills: https://github.com/Jakeschincariol/replica-skill)
+`replica/alternatives/`: a school-fee app and a field-service app. Both need selling, so they're parked.
