@@ -1,0 +1,28 @@
+feature,area,priority,original,clone,notes
+Login for bursar/head/owner,accounts,must,yes,no,phone OTP
+Import students from Excel,students,must,no,no,DAR ADDITION: schools live in Excel; this is day-one onboarding
+Student list with balances,students,must,yes,no,
+Student statement shareable as PDF,students,must,yes,no,
+Fee structure per class per term,fees,must,yes,no,
+Generate term invoices,fees,must,yes,no,
+Discounts (sibling scholarship),fees,must,yes,no,
+Record payment and issue receipt,payments,must,yes,no,Zeraki: easy receipting
+Duplicate payment reference warning,payments,must,no,no,DAR ADDITION: same bank slip entered twice
+Collected vs expected cashflow summary,dashboard,must,yes,no,
+Bulk SMS reminders to parents owing,messages,must,yes,no,
+Defaulters report with export,reports,must,yes,no,
+Pledges tracking,pledges,should,yes,no,
+Receipt sent to parent automatically by SMS/WhatsApp,messages,must,no,no,DAR ADDITION: ends receipt disputes
+Combined balance for siblings,students,should,no,no,DAR ADDITION
+Collection by class report,reports,should,yes,no,
+Daily cash report,reports,should,yes,no,
+Expense tracking,expenses,could,yes,no,not core to fees: later
+Parent pay page with link per student,payments,should,no,no,DAR ADDITION: phase 2
+Automatic mobile-money collection (M-Pesa Mixx Airtel) via aggregator,payments,should,no,no,DAR ADDITION: phase 2; works on every network unlike Airtel School Pay
+Auto-match payments to students by reference,payments,should,no,no,DAR ADDITION: phase 2
+Unmatched payments queue,payments,should,no,no,DAR ADDITION: phase 2
+Swahili and English,i18n,must,no,no,DAR ADDITION: parent messages in Swahili
+WhatsApp channel for reminders,messages,should,no,no,DAR ADDITION
+Works well on a phone,platform,must,yes,no,bursars often have no desktop
+On-site bursar training,support,could,yes,skip,replace with short Swahili videos (time budget)
+Exams attendance report cards,other modules,could,yes,skip,stay narrow; that's a full school system
