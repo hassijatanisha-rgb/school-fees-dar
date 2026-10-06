@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Stitchly – Full Page Screenshot",
+  "short_name": "Stitchly",
+  "version": "1.0.0",
+  "description": "Capture an entire web page as one clean image in a click. No watermark, works on modern web apps, one-time Pro unlock.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Capture full page (Alt+Shift+P)",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": { "default": "Alt+Shift+P" },
+      "description": "Capture the full page"
+    },
+    "capture-region": {
+      "suggested_key": { "default": "Alt+Shift+R" },
+      "description": "Capture a selected region (Pro)"
+    }
+  },
+  "options_page": "options.html",
+  "permissions": ["activeTab", "scripting", "storage", "contextMenus"],
+  "host_permissions": ["https://api.lemonsqueezy.com/*"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

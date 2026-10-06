@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stitchly settings</title>
+<link rel="icon" href="icons/icon32.png">
+<link rel="stylesheet" href="ui.css">
+<link rel="stylesheet" href="options.css">
+</head>
+<body>
+<main>
+  <header class="brand"><img src="icons/icon48.png" alt="">Stitchly <span class="muted" style="font-weight:500">settings</span></header>
+
+  <div class="banner" id="why" hidden></div>
+
+  <section class="card">
+    <div class="row">
+      <h2>Your plan</h2>
+      <span class="chip free" id="status">Free</span>
+    </div>
+    <p class="muted" id="plan-text">Full-page capture, PNG download and copy are free forever, with no watermark.</p>
+
+    <div id="soon" class="soon" hidden>
+      <strong>Pro coming soon.</strong> PDF export, annotation and region capture will be a one-time US$12 unlock. No subscription.
+    </div>
+
+    <div id="activate-box">
+      <label for="key">Licence key</label>
+      <div class="field">
+        <input id="key" type="text" autocomplete="off" spellcheck="false" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX">
+        <button class="btn primary" id="activate">Activate</button>
+      </div>
+      <p class="msg" id="msg" role="status" aria-live="polite"></p>
+      <p class="muted small" id="buy-line">Don't have a key? <a id="buy" href="#" target="_blank" rel="noopener">Get Stitchly Pro for US$12, one time</a>.</p>
+    </div>
+
+    <div id="pro-box" hidden>
+      <p>Pro is active on this browser. Thanks for supporting an independent tool.</p>
+      <button class="btn" id="deactivate">Deactivate on this device</button>
+      <p class="msg" id="msg2" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Free vs Pro</h2>
+    <table class="compare">
+      <thead><tr><th></th><th>Free</th><th>Pro</th></tr></thead>
+      <tbody>
+        <tr><td>Full-page capture, PNG download, copy to clipboard</td><td>✓</td><td>✓</td></tr>
+        <tr><td>No watermark</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Scrolling web apps and sticky headers handled</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Download as PDF</td><td>–</td><td>✓</td></tr>
+        <tr><td>Annotate: box, arrow, text, blur</td><td>–</td><td>✓</td></tr>
+        <tr><td>Capture a selected region</td><td>–</td><td>✓</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Shortcuts</h2>
+    <ul class="keys">
+      <li><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> Capture the full page (or click the toolbar icon)</li>
+      <li><kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> Capture a selected region (Pro; also in the icon's right-click menu)</li>
+    </ul>
+    <p class="muted small">Change shortcuts at <code>chrome://extensions/shortcuts</code>.</p>
+  </section>
+
+  <section class="card">
+    <h2>Privacy</h2>
+    <p class="muted">Captures are processed and stored only on this device (the last 3 are kept so you can reopen them). No analytics, no tracking. The only network request Stitchly makes is the licence check with Lemon Squeezy when you activate Pro (and a quiet re-check about once a week).</p>
+  </section>
+</main>
+<script src="config.js"></script>
+<script src="license.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

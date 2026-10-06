@@ -1,0 +1,26 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Web app with inner scroller</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; font: 15px/1.5 sans-serif; }
+  .shell { display: grid; grid-template-rows: 56px 1fr; grid-template-columns: 220px 1fr; height: 100vh; }
+  .top { grid-column: 1 / 3; background: #1e293b; color: #fff; display: flex; align-items: center; padding: 0 20px; }
+  .side { background: #e2e8f0; padding: 16px; }
+  #content { overflow-y: auto; position: relative; background: #fff; }
+  #marker { position: absolute; left: 0; top: 0; }
+  .intro { height: 200px; margin-left: 30px; padding: 16px; box-sizing: border-box; }
+  .subbar { position: sticky; top: 0; height: 48px; margin-left: 30px; background: rgb(255,212,0); z-index: 2; }
+  .row { height: 400px; margin-left: 30px; border-bottom: 1px solid #eee; padding: 16px; box-sizing: border-box; }
+</style></head>
+<body>
+<div class="shell">
+  <div class="top">My App</div>
+  <nav class="side">Sidebar</nav>
+  <div id="content"><img id="marker" alt=""><div class="intro">Dashboard intro</div><div class="subbar"></div></div>
+</div>
+<script src="marker.js"></script>
+<script>
+  const content = document.getElementById('content');
+  for (let i = 0; i < 12; i++) { const r = document.createElement('div'); r.className = 'row'; r.textContent = 'Row ' + (i + 1); content.appendChild(r); }
+  drawMarker(document.getElementById('marker'), content.scrollHeight, 0);
+</script>
+</body></html>

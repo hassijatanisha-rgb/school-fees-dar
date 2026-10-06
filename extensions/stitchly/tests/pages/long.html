@@ -1,0 +1,21 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Long page with sticky header</title>
+<style>
+  html, body { margin: 0; font: 16px/1.5 sans-serif; background: #fff; }
+  header { position: sticky; top: 0; height: 64px; background: rgb(255,0,170); color: #fff; display: flex; align-items: center; padding: 0 40px; z-index: 10; }
+  main { position: relative; height: 6000px; }
+  #marker { position: absolute; left: 0; top: 0; }
+  section { margin-left: 40px; height: 500px; border-bottom: 1px solid #ddd; padding: 20px; box-sizing: border-box; }
+  #chat { position: fixed; right: 24px; bottom: 24px; width: 56px; height: 56px; border-radius: 50%; background: rgb(0,200,83); z-index: 11; }
+</style></head>
+<body>
+<header>Sticky header (should appear once)</header>
+<main><img id="marker" alt=""></main>
+<div id="chat"></div>
+<script src="marker.js"></script>
+<script>
+  const main = document.querySelector('main');
+  for (let i = 0; i < 12; i++) { const s = document.createElement('section'); s.textContent = 'Section ' + (i + 1); main.appendChild(s); }
+  drawMarker(document.getElementById('marker'), 6000, main.offsetTop);
+</script>
+</body></html>
