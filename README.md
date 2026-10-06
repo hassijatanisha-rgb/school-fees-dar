@@ -1,29 +1,58 @@
 # Risiti Rahisi
 
-A free receipt and invoice maker for small businesses in Tanzania, in Swahili and English. Fill in the items, tap **Tuma kwa WhatsApp**, and the customer gets a clean receipt image. Every receipt carries a small "Imetengenezwa bure na Risiti Rahisi · <your site>" line, so each receipt sent advertises the app.
+A free receipt and invoice maker for small businesses in Tanzania, in Swahili and English. Fill in the items, tap **Tuma kwa WhatsApp**, and the customer gets a clean receipt image. Free receipts carry a small "Imetengenezwa bure na Risiti Rahisi · <site>" footer, so every receipt sent advertises the app.
 
-- No signup, no server, no running cost: three static files in `app/`.
-- Data stays on the user's phone (localStorage).
-- Works on any phone browser; on Android it shares the image straight into WhatsApp.
+No signup, no server, no running cost. The whole site is the `docs/` folder.
 
-## Go live (one time, ~10 minutes, free)
+| plan | price | what you get |
+| --- | --- | --- |
+| Free | TSh 0 | unlimited receipts and invoices, with the footer |
+| Basic | TSh 10,000 / month | your logo, no footer |
+| Pro | TSh 20,000 / month | Basic + customer list, today/month sales totals, Excel (CSV) export, backup and restore |
 
-1. Sign up at https://pages.cloudflare.com (or Netlify) with GitHub.
-2. Create a project from this repo. Build command: none. Output directory: `app`.
-3. Optional (~US$10/yr): buy a short domain and attach it. The footer on every receipt shows whatever address the site runs on.
+## 1. Go live (one time, ~10 minutes, free)
 
-## Getting users without selling
+**Cloudflare Pages (recommended, keeps the code private):**
+1. Sign up at https://pages.cloudflare.com, then *Create → Pages → Connect to Git*, and pick this repo.
+2. Framework: *None*. Build command: leave empty. Output directory: `docs`.
+3. Deploy. You get an address like `risiti-rahisi.pages.dev`; name the project `risiti-rahisi` to get that.
+4. Optional: in the project, turn on *Web Analytics* (free, no cookies) to see visits.
 
-See `GROWTH.md`. Posting a status is the only thing you do.
+**Or GitHub Pages:** this needs the repo to be public on a free account. *Settings → Pages → Deploy from a branch → main → /docs*.
 
-## Making money (later, only once people use it)
+## 2. Turn on payments (2 minutes)
 
-Free stays free. Paid "Pro", roughly TZS 5,000/month, would add: own logo, no footer, customer list, backup of history. Don't build it until a few hundred businesses use the free version. Before charging, you'll need a way to take mobile-money payments, which usually means a registered business.
+On GitHub, open `docs/config.js`, click the pencil icon, and fill in:
+
+```js
+payNumber: '0712 345 678',   // the M-Pesa / Mixx / Airtel number customers pay to
+payName: 'YOUR NAME',        // the name they see when paying
+whatsapp: '0712 345 678',    // where they send the transaction ID
+```
+
+Commit, and the site updates itself. Until these are filled in, the app shows "paid plans coming soon".
+
+## 3. When someone pays (about 1 minute)
+
+1. A WhatsApp message arrives: "nimelipa … Namba ya muamala … Simu ya biashara …".
+2. Check the money arrived in your mobile-money SMS.
+3. Open `<your site>/admin.html`. The first time only, load your `risiti-private-key.json` file.
+4. Enter their business phone, the plan and the months, then tap **Make unlock link** and **Send on WhatsApp**.
+5. They tap the link and their plan is unlocked on their phone.
+
+**Keep `risiti-private-key.json` safe and private.** Anyone with it can make free codes. It is not in this repo, and `.gitignore` blocks it. If you lose it, Claude can make a new key pair; old codes keep working until they expire, but new codes need the new key.
+
+Unlock codes are signed (ECDSA). The app can check a code but can't make one, and each code is tied to one business phone with an end date.
 
 ## Before launch
 
 - Have a native speaker check the Swahili wording.
-- Check that the name "Risiti Rahisi" isn't already taken in Tanzania (BRELA search) and that a domain is free.
+- Check that "Risiti Rahisi" isn't already taken in Tanzania (BRELA search).
+- Taking money for a service may require business registration and a TIN in Tanzania. Check before you earn much. This is not legal advice.
+
+## Marketing
+
+See `GROWTH.md`: ready-to-paste posts.
 
 ## Other ideas explored
 

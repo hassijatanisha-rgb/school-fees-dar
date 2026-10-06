@@ -1,23 +1,54 @@
-# Getting users without talking to anyone
+# Marketing kit: paste and go
 
-The loop: a business sends a receipt → the customer sees "Imetengenezwa bure na Risiti Rahisi · <site>" → some customers run businesses too → they try it.
+Replace `<site>` with your real address (e.g. `risiti-rahisi.pages.dev`).
 
-## Your only job: post once, then occasionally
+The engine is the footer on every free receipt: businesses send receipts, customers see the link, and some customers run businesses too. Your posts just start the loop.
 
-**WhatsApp status / Instagram story / Facebook post (Swahili):**
+## WhatsApp status (repost every week or two)
 
-> Una duka au biashara? 🧾 Tengeneza risiti safi kwa sekunde na umtumie mteja kwenye WhatsApp, BURE. Hakuna kujisajili. 👉 <your site>
+> Una duka au biashara? 🧾 Tengeneza risiti safi kwa sekunde na umtumie mteja kwenye WhatsApp, BURE. Hakuna kujisajili. 👉 <site>
 
-**English version:**
+> Wateja wanauliza risiti? Usiandike kwa mkono tena ✍️❌ Risiti Rahisi: bure, Kiswahili, inatumwa WhatsApp moja kwa moja 👉 <site>
 
-> Run a shop or small business? Make a clean receipt in seconds and send it to your customer on WhatsApp, free. No signup. 👉 <your site>
+## WhatsApp groups (family, school, business groups you're already in)
 
-Post it every couple of weeks. Share it into Facebook groups for Dar business owners (e.g. groups for duka owners, online sellers, "biashara Dar") only where the group rules allow it.
+> Habari wote 👋 Nimetengeneza kitu kidogo cha bure kwa wenye biashara: unaandika bidhaa, unabonyeza "Tuma", mteja anapata risiti safi kwenye WhatsApp. Hakuna kujisajili. Kama una duka au unauza online, jaribu: <site>. Maoni yanakaribishwa 🙏
 
-## Free search traffic
+## JamiiForums (Tanzania's biggest forum, the *Biashara / Ujasiriamali* section)
 
-People search for "risiti", "ankara", "receipt template Tanzania". The page title and description already target these. Later, Claude can add a few short help pages ("Jinsi ya kutengeneza risiti", "Invoice template Tanzania") to rank in search.
+**Title:** Nimetengeneza app ya bure ya kutengeneza risiti na kuzituma WhatsApp
 
-## What to watch
+> Wakuu, nimetengeneza tovuti ndogo ya bure kwa wafanyabiashara wadogo: unaweka jina la biashara, bidhaa na bei, inakutengenezea risiti (au ankara) safi, unaituma kwa mteja kwenye WhatsApp kama picha.
+>
+> - Bure, hakuna kujisajili
+> - Kiswahili na Kiingereza
+> - Taarifa zinabaki kwenye simu yako tu
+> - Inahesabu jumla na namba za risiti yenyewe
+>
+> Link: <site>
+>
+> Naomba maoni: nini kiongezwe? Ni mimi niliyeitengeneza.
 
-Add free, cookie-less analytics at go-live (Cloudflare Web Analytics is one toggle). If visits grow week on week, it's working. If they don't after 2 months, try a different idea; you've lost nothing.
+## Reddit: r/tanzania (read the sub rules first; be upfront that it's yours)
+
+**Title:** I made a free receipt maker for small businesses in TZ (Swahili/English, sends to WhatsApp)
+
+> A lot of dukas and online sellers here still write receipts by hand or type them in WhatsApp. I made a simple free web page: enter items and prices, tap send, and your customer gets a clean receipt image on WhatsApp. No signup, works on any phone, Swahili or English, and your data stays on your phone.
+>
+> <site>
+>
+> I built it, so feedback is very welcome, especially on the Swahili wording and what features would make it useful for your business.
+
+## Facebook / Instagram
+
+Groups for Dar business owners and online sellers (search "biashara Dar", "wajasiriamali", "online sellers Tanzania"). Post the JamiiForums text only where group rules allow promotion.
+
+## Rules that keep this low-stakes
+
+- Post only in places you're a member of, and follow each group's rules. No mass DMs or messages to strangers: that's spam, and it gets numbers banned.
+- Never post fake reviews or pretend to be a customer.
+- Reply to comments if you feel like it. You don't have to.
+
+## Is it working?
+
+Check Cloudflare Web Analytics weekly. Growing visits mean keep posting now and then. If it's flat after ~2 months, stop; it cost nothing.

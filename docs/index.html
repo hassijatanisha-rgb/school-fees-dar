@@ -24,15 +24,16 @@
       <label><span data-t="tin">TIN (si lazima)</span><input id="bizTin" inputmode="numeric"></label>
     </div>
     <label><span data-t="address">Mahali (si lazima)</span><input id="bizAddress"></label>
+    <label><span data-t="logo">Nembo yako (Basic)</span><input id="logo" type="file" accept="image/*"></label>
   </section>
 
-  <section class="card">
+  <section class="card" id="docCard">
     <div class="seg" role="radiogroup">
       <label><input type="radio" name="type" value="receipt" checked><span data-t="receipt">Risiti</span></label>
       <label><input type="radio" name="type" value="invoice"><span data-t="invoice">Ankara</span></label>
     </div>
     <div class="row">
-      <label><span data-t="customer">Mteja</span><input id="customer"></label>
+      <label><span data-t="customer">Mteja</span><input id="customer" list="custList" autocomplete="off"><datalist id="custList"></datalist></label>
       <label><span data-t="custPhone">Simu ya mteja</span><input id="custPhone" inputmode="tel" placeholder="07XX XXX XXX"></label>
     </div>
 
@@ -67,6 +68,30 @@
     <p class="hint" data-t="privacy">Taarifa zako zinabaki kwenye simu yako tu.</p>
   </section>
 
+  <section class="card" id="proCard">
+    <h2 data-t="sales">Mauzo yako (Pro)</h2>
+    <p id="summary" class="summary"></p>
+    <div class="actions three">
+      <button id="exportCsv" class="ghost" type="button">Excel (CSV)</button>
+      <button id="backup" class="ghost" type="button" data-t="backup">Hifadhi nakala</button>
+      <button id="restoreBtn" class="ghost" type="button" data-t="restore">Rejesha nakala</button>
+      <input id="restore" type="file" accept="application/json" hidden>
+    </div>
+  </section>
+
+  <section class="card" id="planCard">
+    <h2 data-t="plans">Mipango</h2>
+    <p id="planStatus" class="status"></p>
+    <ul class="plans">
+      <li><strong data-t="free">Bure</strong><span data-t="freeDesc">Risiti na ankara bila kikomo.</span></li>
+      <li><strong>Basic · <span class="price-basic"></span></strong><span data-t="basicDesc">Nembo yako kwenye risiti, bila tangazo la Risiti Rahisi.</span></li>
+      <li><strong>Pro · <span class="price-pro"></span></strong><span data-t="proDesc">Basic + orodha ya wateja, jumla ya mauzo ya leo na mwezi, Excel, na nakala ya kuhifadhi.</span></li>
+    </ul>
+    <div id="howToPay"></div>
+    <label><span data-t="code">Namba ya kufungua</span><input id="licInput" autocomplete="off"></label>
+    <button id="licApply" class="wide" type="button" data-t="apply">Fungua</button>
+  </section>
+
   <section class="card">
     <h2 data-t="history">Historia</h2>
     <ul id="history"></ul>
@@ -82,6 +107,7 @@
   </div>
 </template>
 
+<script src="config.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
