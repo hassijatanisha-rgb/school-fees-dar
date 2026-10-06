@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snipkey Settings</title>
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <img class="logo" src="icons/icon48.png" alt="">
+      <h1>Snipkey</h1>
+      <span id="plan" class="badge">Free</span>
+      <span class="spacer"></span>
+      <button id="headerGetPro" class="pro-btn">Get Pro · US$19 once</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="limitBanner" class="msg warn hidden"></div>
+
+    <section class="card" id="snippetsCard">
+      <div class="card-head">
+        <h2>Snippets <span id="count" class="muted"></span></h2>
+        <button id="newBtn" class="primary">+ New snippet</button>
+      </div>
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search shortcuts and text" aria-label="Search snippets">
+        <label class="folder-filter">
+          <select id="folderFilter" aria-label="Filter by folder"><option value="">All folders</option></select>
+          <span class="lock pro-only">Pro</span>
+        </label>
+      </div>
+      <div class="split">
+        <ul id="list" aria-label="Snippets"></ul>
+        <form id="editor" class="editor hidden" autocomplete="off">
+          <h3 id="editorTitle">New snippet</h3>
+          <label>Shortcut
+            <input id="edShortcut" type="text" maxlength="32" spellcheck="false" placeholder=";addr">
+          </label>
+          <label>Folder <span class="lock pro-only">Pro</span>
+            <input id="edFolder" type="text" list="folderList" maxlength="40" placeholder="e.g. Support">
+            <datalist id="folderList"></datalist>
+          </label>
+          <label>Expansion text
+            <textarea id="edText" rows="7" spellcheck="true"></textarea>
+          </label>
+          <div class="tokens" aria-label="Insert placeholder">
+            <span class="muted">Insert:</span>
+            <button type="button" data-token="{date}">{date}</button>
+            <button type="button" data-token="{time}">{time}</button>
+            <button type="button" data-token="{clipboard}">{clipboard}</button>
+            <button type="button" data-token="{cursor}">{cursor}</button>
+            <button type="button" data-token="{input:Name}" id="fillTokenBtn">{input:…}<span class="lock pro-only">Pro</span></button>
+          </div>
+          <p class="hint muted">{cursor} sets where the caret lands. {input:Name} asks you for a value each time you expand (Pro).</p>
+          <div id="edMsg" class="msg" role="status"></div>
+          <div class="actions">
+            <button type="button" id="edDelete" class="danger">Delete</button>
+            <span class="spacer"></span>
+            <button type="button" id="edCancel">Cancel</button>
+            <button type="submit" class="primary" id="edSave">Save</button>
+          </div>
+        </form>
+        <div id="editorEmpty" class="editor-empty muted">Select a snippet to edit it, or create a new one.<br><br>Type a shortcut in any text box on the web and Snipkey replaces it with your text.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Import &amp; export <span class="lock pro-only">Pro</span></h2></div>
+      <p class="muted">Back up your snippets as JSON, or import JSON or a simple CSV file with <code>shortcut,text</code> columns. Imported snippets replace ones with the same shortcut.</p>
+      <div class="row">
+        <button id="exportBtn" class="pro-gated">Export JSON</button>
+        <label class="file-btn pro-gated" id="importLabel">Import JSON / CSV<input id="importFile" type="file" accept=".json,.csv,application/json,text/csv" hidden></label>
+      </div>
+      <div id="ioMsg" class="msg" role="status"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Sync <span class="lock pro-only">Pro</span></h2></div>
+      <label class="switch-row">
+        <input id="syncToggle" type="checkbox" class="pro-gated">
+        <span>Sync snippets across my Chrome devices (uses your browser's own Chrome sync; about 100 KB of snippets)</span>
+      </label>
+      <div id="syncMsg" class="msg" role="status"></div>
+    </section>
+
+    <section class="card" id="licenseCard">
+      <div class="card-head"><h2>Licence</h2></div>
+      <p>Status: <strong id="licStatus">Free</strong></p>
+      <div id="licComingSoon" class="msg warn hidden">Pro coming soon. Snipkey Free works fully in the meantime.</div>
+      <div id="licActivate">
+        <p class="muted">Bought Pro? Paste the licence key from your receipt email. One-time payment, no subscription, no account.</p>
+        <div class="row">
+          <input id="licKey" type="text" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" spellcheck="false" aria-label="Licence key">
+          <button id="licActivateBtn" class="primary">Activate</button>
+        </div>
+      </div>
+      <div id="licActive" class="hidden row">
+        <span class="muted">Pro is active on this browser. Thank you!</span>
+        <button id="licDeactivateBtn">Deactivate</button>
+      </div>
+      <div id="licMsg" class="msg" role="status"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Privacy</h2></div>
+      <p class="muted">Your snippets stay in your browser. Snipkey has no account, no analytics and no servers of its own; nothing you type is collected or sent anywhere. Snipkey never acts in password fields. The only network request is the licence check with Lemon Squeezy when you activate Pro.</p>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="license.js"></script>
+  <script src="lib/snippets.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snipkey</title>
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <img class="logo" src="icons/icon48.png" alt="">
+    <strong>Snipkey</strong>
+    <span id="plan" class="badge">Free</span>
+    <span class="spacer"></span>
+    <button id="openOptions" class="link" title="Manage snippets">Manage</button>
+  </header>
+  <input id="search" type="search" placeholder="Search snippets" aria-label="Search snippets">
+  <ul id="list" aria-label="Snippets"></ul>
+  <p id="empty" class="muted hidden">No snippets match.</p>
+  <form id="addForm" autocomplete="off">
+    <div class="add-row">
+      <input id="addShortcut" type="text" placeholder=";shortcut" aria-label="Shortcut" maxlength="32" spellcheck="false">
+      <button id="addBtn" type="submit" class="primary">Add</button>
+    </div>
+    <textarea id="addText" placeholder="Expansion text. Try {date}, {time}, {cursor}" aria-label="Expansion text" rows="2"></textarea>
+    <div id="addMsg" class="msg" role="status"></div>
+    <div id="upgrade" class="upgrade hidden">
+      <span>Free includes 10 snippets. Pro unlocks unlimited snippets, fill-in fields, folders, import/export and sync. One-time US$19.</span>
+      <button id="getPro" type="button" class="pro-btn">Get Pro</button>
+    </div>
+  </form>
+  <script src="config.js"></script>
+  <script src="license.js"></script>
+  <script src="lib/snippets.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

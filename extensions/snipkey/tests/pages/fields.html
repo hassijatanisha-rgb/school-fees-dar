@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Snipkey test fields</title>
+<style>
+  body { font: 15px system-ui, sans-serif; margin: 24px; }
+  label { display: block; margin: 12px 0 4px; font-weight: 600; }
+  input, textarea, [contenteditable] { width: 520px; padding: 6px; border: 1px solid #999; font: inherit; }
+  [contenteditable] { min-height: 60px; }
+</style>
+</head>
+<body>
+  <label for="plain">Plain input</label><input id="plain" type="text">
+  <label for="search">Search input</label><input id="search" type="search">
+  <label for="area">Textarea</label><textarea id="area" rows="5"></textarea>
+  <label>Contenteditable</label><div id="ce" contenteditable="true"></div>
+  <label for="react">React-style controlled input</label><input id="react" type="text">
+  <label for="reactEmail">React-style controlled email input</label><input id="reactEmail" type="email">
+  <label for="pw">Password</label><input id="pw" type="password">
+  <script>
+    // Simulates a React controlled input: the page keeps its own "state", and re-renders the DOM
+    // value from state after each tick. Direct .value writes are tracked (like React's value tracker)
+    // and do not change state; only an input event carrying a new DOM value updates state.
+    function controlled(el) {
+      const desc = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value');
+      let state = '';
+      let tracked = '';
+      const render = () => setTimeout(() => {
+        if (desc.get.call(el) !== state) { desc.set.call(el, state); tracked = state; }
+      }, 0);
+      Object.defineProperty(el, 'value', {
+        configurable: true,
+        get() { return desc.get.call(el); },
+        set(v) { tracked = String(v); desc.set.call(el, v); render(); },
+      });
+      el.addEventListener('input', () => {
+        const v = desc.get.call(el);
+        if (v !== tracked) { state = v; tracked = v; }
+        render();
+      });
+      el.reactState = () => state;
+    }
+    controlled(document.getElementById('react'));
+    controlled(document.getElementById('reactEmail'));
+    window.reactState = (id) => document.getElementById(id).reactState();
+  </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+body { width: 360px; padding: 12px; }
+header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+header strong { font-size: 15px; }
+.spacer { flex: 1; }
+#list { list-style: none; margin: 8px 0; padding: 0; max-height: 250px; overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+#list li { display: flex; gap: 10px; align-items: baseline; padding: 8px 10px; border-bottom: 1px solid var(--line); cursor: pointer; }
+#list li:last-child { border-bottom: none; }
+#list li:hover { background: var(--chip); }
+#list .preview { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 13px; min-width: 0; flex: 1; }
+#list li.inactive { opacity: .5; }
+#addForm { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+.add-row { display: flex; gap: 8px; margin-bottom: 8px; }
+.add-row input { flex: 1; font-family: ui-monospace, Menlo, monospace; }
+#addText { min-height: 54px; }
+.upgrade { margin-top: 8px; padding: 10px; border-radius: var(--radius); background: var(--warn-bg); color: var(--warn-ink); font-size: 12.5px; display: flex; gap: 10px; align-items: center; }
+.upgrade button { flex: none; }
