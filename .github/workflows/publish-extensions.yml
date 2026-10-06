@@ -1,0 +1,88 @@
+# Uploads and publishes the Chrome extensions through the Chrome Web Store API v2.
+#
+# Runs when an extension's manifest.json changes on main (bump "version" to release),
+# or by hand from the Actions tab.
+#
+# One-time setup (repo Settings -> Secrets and variables -> Actions):
+#   secret   CWS_SERVICE_ACCOUNT_JSON  Google Cloud service-account key (JSON) with the
+#                                      Chrome Web Store API enabled; its email must be added
+#                                      in the Chrome Web Store developer dashboard.
+#   variable CWS_PUBLISHER_ID          from the developer dashboard
+#   variable STITCHLY_ITEM_ID          the item ID once the first listing exists
+#   variable SNIPKEY_ITEM_ID
+#   variable LS_STORE_ID               Lemon Squeezy store ID (turns on Pro sales)
+#   variable STITCHLY_LS_PRODUCT_ID / STITCHLY_BUY_URL
+#   variable SNIPKEY_LS_PRODUCT_ID  / SNIPKEY_BUY_URL
+# An extension without its item ID is skipped, so this is safe to merge before setup.
+name: Publish extensions
+
+on:
+  push:
+    branches: [main]
+    paths: ['extensions/*/manifest.json']
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: stitchly
+            item_var: STITCHLY_ITEM_ID
+            product_var: STITCHLY_LS_PRODUCT_ID
+            buy_var: STITCHLY_BUY_URL
+          - name: snipkey
+            item_var: SNIPKEY_ITEM_ID
+            product_var: SNIPKEY_LS_PRODUCT_ID
+            buy_var: SNIPKEY_BUY_URL
+    env:
+      ITEM_ID: ${{ vars[matrix.item_var] }}
+      PUBLISHER_ID: ${{ vars.CWS_PUBLISHER_ID }}
+      LS_STORE_ID: ${{ vars.LS_STORE_ID }}
+      LS_PRODUCT_ID: ${{ vars[matrix.product_var] }}
+      BUY_URL: ${{ vars[matrix.buy_var] }}
+    steps:
+      - name: Skip until the listing exists
+        if: env.ITEM_ID == '' || env.PUBLISHER_ID == ''
+        run: |
+          echo "::notice::${{ matrix.name }} - no item/publisher ID set yet, skipping."
+
+      - uses: actions/checkout@v4
+        if: env.ITEM_ID != '' && env.PUBLISHER_ID != ''
+
+      - name: Write Lemon Squeezy config
+        if: env.ITEM_ID != '' && env.PUBLISHER_ID != '' && env.LS_STORE_ID != '' && env.LS_PRODUCT_ID != ''
+        run: |
+          node -e '
+            const c = { storeId: process.env.LS_STORE_ID, productId: process.env.LS_PRODUCT_ID, buyUrl: process.env.BUY_URL || "" };
+            require("fs").writeFileSync("extensions/${{ matrix.name }}/config.js",
+              "// Written by the publish workflow from repository variables.\nconst LICENSE_CONFIG = " + JSON.stringify(c, null, 2) + ";\n");'
+
+      - name: Package
+        if: env.ITEM_ID != '' && env.PUBLISHER_ID != ''
+        run: bash extensions/${{ matrix.name }}/tests/package.sh
+
+      - uses: google-github-actions/auth@v2
+        if: env.ITEM_ID != '' && env.PUBLISHER_ID != ''
+        id: gauth
+        with:
+          credentials_json: ${{ secrets.CWS_SERVICE_ACCOUNT_JSON }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/chromewebstore
+
+      - name: Upload and publish
+        if: env.ITEM_ID != '' && env.PUBLISHER_ID != ''
+        env:
+          TOKEN: ${{ steps.gauth.outputs.access_token }}
+        run: |
+          set -euo pipefail
+          item="publishers/${PUBLISHER_ID}/items/${ITEM_ID}"
+          curl -sS --fail-with-body -H "Authorization: Bearer ${TOKEN}" -X POST \
+            -T "extensions/${{ matrix.name }}/${{ matrix.name }}.zip" \
+            "https://chromewebstore.googleapis.com/upload/v2/${item}:upload"
+          echo
+          curl -sS --fail-with-body -H "Authorization: Bearer ${TOKEN}" -X POST \
+            -H "Content-Type: application/json" -d '{}' \
+            "https://chromewebstore.googleapis.com/v2/${item}:publish"
